@@ -1,26 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>MRI</title>
+  <style>
+    /* Browser ki default settings ko reset karne ke liye */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* Screen se bahar scroll na ho */
+      background-color: #000; /* Loading ke waqt background color */
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
 <body>
+
   <iframe 
     src="https://script.google.com/macros/s/AKfycbwmbf2jZBVEnBGxzH31vScMfjfZVv9P5sV7HWg8chanz6gAvJZajNu45vHPhD57jUIdfA/exec"
-    width="100%"
-    height="100%"
-    allowfullscreen="true"
-    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+    allowfullscreen="true">
   </iframe>
 
   <script>
     window.onload = function() {
-      document.querySelector('iframe')
-        .requestFullscreen()
-        .catch((err) => {
-          console.error('Error attempting to enable full-screen mode:', err.message);
+      const iframe = document.querySelector('iframe');
+      
+      // Fullscreen request (Note: Aksar browsers user click ke bagair isse allow nahi karte)
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen().catch((err) => {
+          console.warn('Auto-fullscreen blocked. This is normal behavior for most browsers.');
         });
+      }
     };
   </script>
 </body>
 </html>
-        
